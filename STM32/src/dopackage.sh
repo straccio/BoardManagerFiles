@@ -43,8 +43,17 @@ coreurl="${url}/packages"
 sum=0
 size=0
 
-find_cmd=gfind
-sed_cmd=gsed
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  find_cmd=gfind
+  sed_cmd=gsed
+  sha256sum_cmd=gsha256sum
+  stat_cmd=gstat
+else
+  find_cmd=find
+  sed_cmd=sed
+  sha256sum_cmd=sha256sum
+  stat_cmd=stat
+fi
 
 ###############################################################################
 ## Help function
@@ -105,8 +114,8 @@ jqHandler()
 
 sumSizeOf()
 {
-  sum=`sha256sum $1| cut -d' ' -f1`
-  size=`stat --printf="%s" $1`
+  sum=`${sha256sum_cmd} $1| cut -d' ' -f1`
+  size=`${stat_cmd} --printf="%s" $1`
 }
 
 # $1 tools name
