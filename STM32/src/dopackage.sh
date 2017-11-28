@@ -37,11 +37,14 @@ pkgname=""
 pkgver=`date +%Y.%-m.%-d`
 jsonFile="${TOPDIR}/package_stm_index.json"
 tmpjsonFile="tmp.json"
-url="https://github.com/stm32duino/BoardManagerFiles/raw/master/STM32"
+url="https://github.com/straccio/BoardManagerFiles_stm32/raw/master/STM32"
 toolsurl="${url}/tools"
 coreurl="${url}/packages"
 sum=0
 size=0
+
+find_cmd=gfind
+sed_cmd=gsed
 
 ###############################################################################
 ## Help function
@@ -60,7 +63,7 @@ usage()
     echo "Directory name will be used as package name:"
     echo ""
     echo "  ln -s <path to the STM32F1 core repo> STM32F1"
-    echo "  git clone https://github.com/stm32duino/Arduino_Core_STM32.git STM32"
+    echo "  git clone https://github.com/straccio/Arduino_Core_STM32.git STM32"
     echo ""
     echo "To package the STM32 tools:"
     echo "  git clone https://github.com/stm32duino/Arduino_Tools.git STM32Tools"
@@ -222,14 +225,14 @@ generateCorePackage()
 
     cd tmp
 	if [ -e $1/system ]; then
-      find $1/system -not -name "*.h" -type f -delete
-      find $1/system -depth -type d -empty -delete
+      ${find_cmd} $1/system -not -name "*.h" -type f -delete
+      ${find_cmd} $1/system -depth -type d -empty -delete
 	fi
   else
     echo -n "Generate package $2..."
   fi
   # before pack, tools path  need to be updated
-  sed -i 's/{runtime.hardware.path}\/tools/{runtime.tools.STM32Tools.path}\/tools/g' $1/platform.txt
+  ${sed_cmd} -i 's/{runtime.hardware.path}\/tools/{runtime.tools.STM32Tools.path}\/tools/g' $1/platform.txt
   tar --exclude=".git" --exclude=".gitignore" -jhcf ${destdir}/$2 $1
   if [ $? -ne 0 ]; then
     echo "failed to create archive $2"
@@ -480,6 +483,7 @@ fi
 
 # First manage tools part
 if [ $onlyCore -eq 0 ] && [ -e $toolsname ]; then
+  echo "First manage tools part"
   # Create package
   pkgname=${toolsname}-${pkgver}.tar.bz2
   toolsver=${pkgver}
@@ -489,12 +493,17 @@ fi
 
 # package one dir
 if [ "$corename" != "" ] && [ -e $corename ]; then
+  echo "package one dir"
   pkgname=${corename}-${pkgver}.tar.bz2
   generateCorePackage $corename $pkgname
   updateJsonPlatform $corename $pkgname
 else
 # package all dir
-  for i in $(find  -L -maxdepth 2 -path "./${toolsname}" -prune -o -name boards.txt -printf "%h\n" | sed 's|./||'); do
+  echo "package all dir"
+  echo ${PWD}
+  echo ${find_cmd}  -L -maxdepth 2 -path "./${toolsname}" -prune -o -name boards.txt -printf "%h\n"
+  for i in $(${find_cmd}  -L -maxdepth 2 -path "./${toolsname}" -prune -o -name boards.txt -printf "%h\n" | ${sed_cmd} 's|./||'); do
+  echo ${i}-${pkgver}.tar.bz2
   pkgname=${i}-${pkgver}.tar.bz2
   generateCorePackage $i $pkgname
   updateJsonPlatform $i $pkgname
