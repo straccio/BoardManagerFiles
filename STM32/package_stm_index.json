@@ -89,8 +89,8 @@
         {
           "url": "https://github.com/straccio/BoardManagerFiles_stm32/raw/master/STM32/packages/STM32-2017.11.28.tar.bz2",
           "archiveFileName": "STM32-2017.11.28.tar.bz2",
-          "checksum": "SHA-256:",
-          "size": "",
+          "checksum": "SHA-256:bf125a1c0f61d31175df967b78070650ffd7178301659f1eefe2ded546e415a4",
+          "size": "16715796",
           "toolsDependencies": [
             {
               "version": "6-2017-q2-update",
