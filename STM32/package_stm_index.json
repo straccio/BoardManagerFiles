@@ -85,7 +85,7 @@
           "name": "STM32 Cores",
           "category": "Contributed",
           "version": "2017.9.22"
-        },
+        }
       ],
       "tools": [
         {
