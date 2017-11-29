@@ -20,6 +20,16 @@
           "size": "16709699",
           "toolsDependencies": [
             {
+              "version": "6-2017-q2-update",
+              "name": "arm-none-eabi-gcc",
+              "packager": "STM32"
+            },
+            {
+              "version": "2017.9.22",
+              "name": "STM32Tools",
+              "packager": "STM32"
+            },
+            {
               "packager": "arduino",
               "name": "CMSIS",
               "version": "4.5.0"
