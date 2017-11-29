@@ -10,21 +10,15 @@
       },
       "platforms": [
         {
-          "url": "https://github.com/stm32duino/BoardManagerFiles/raw/master/STM32/packages/STM32-2017.9.22.tar.bz2",
-          "archiveFileName": "STM32-2017.9.22.tar.bz2",
-          "checksum": "SHA-256:9211cdbb540a90143a7603519c8e9ae8ef18e61836d647fd7ef67278983b8688",
-          "size": "15703585",
+          "name": "STM32 Cores",
+          "architecture": "stm32",
+          "version": "2017.11.29",
+          "category": "Contributed",
+          "url": "https://github.com/straccio/BoardManagerFiles_stm32/raw/master/STM32/packages/STM32-2017.11.29.tar.bz2",
+          "archiveFileName": "STM32-2017.11.29.tar.bz2",
+          "checksum": "SHA-256:74f2d29d6f9c23f56c6a3a07c185a5f2eb4d4f3d8ea219c5b68652df59f13f30",
+          "size": "16709699",
           "toolsDependencies": [
-            {
-              "version": "6-2017-q2-update",
-              "name": "arm-none-eabi-gcc",
-              "packager": "STM32"
-            },
-            {
-              "version": "2017.9.22",
-              "name": "STM32Tools",
-              "packager": "STM32"
-            },
             {
               "packager": "arduino",
               "name": "CMSIS",
@@ -48,6 +42,9 @@
               "name": "Nucleo F103RB"
             },
             {
+              "name": "Nucleo F302R8"
+            },
+            {
               "name": "Nucleo F303RE"
             },
             {
@@ -55,6 +52,9 @@
             },
             {
               "name": "Nucleo F411RE"
+            },
+            {
+              "name": "Nucleo F446RE"
             },
             {
               "name": "Nucleo L053R8"
@@ -69,6 +69,9 @@
               "name": "Nucleo L432KC"
             },
             {
+              "name": "Nucleo F303K8"
+            },
+            {
               "name": "STM32F100RB-DISCVL"
             },
             {
@@ -79,12 +82,11 @@
             },
             {
               "name": "STM32L475VG-DISCOVERY-IOT"
+            },
+            {
+              "name": "Discovery L072CZ-LRWAN1"
             }
-          ],
-          "architecture": "stm32",
-          "name": "STM32 Cores",
-          "category": "Contributed",
-          "version": "2017.9.22"
+          ]
         }
       ],
       "tools": [
